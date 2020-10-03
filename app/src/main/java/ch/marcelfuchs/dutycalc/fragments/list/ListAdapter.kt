@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ch.marcelfuchs.dutycalc.R
+import ch.marcelfuchs.dutycalc.model.Tour
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-    private var userList = emptyList<User>()
+    private var tourList = emptyList<Tour>()
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {}
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
@@ -20,11 +21,11 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return userList.size
+        return tourList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = userList[position]
+        val currentItem = tourList[position]
         holder.itemView.id_txt.text = currentItem.id.toString()
         holder.itemView.firstName_txt.text = currentItem.firstName
         holder.itemView.lastName_txt.text = currentItem.lastName
@@ -38,7 +39,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     fun setData(user: List<User>) {
-        this.userList = user
+        this.tourList = user
         notifyDataSetChanged()
     }
 }
