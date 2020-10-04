@@ -9,5 +9,5 @@
         android:id="@+id/ListFragment"
         android:name="ch.marcelfuchs.dutycalc.fragments.list.ListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/list_fragment"/>
+        tools:layout="@layout/fragment_list"/>
 </navigation>

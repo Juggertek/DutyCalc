@@ -4,24 +4,24 @@ import androidx.lifecycle.LiveData
 import ch.marcelfuchs.dutycalc.data.TourDao
 import ch.marcelfuchs.dutycalc.model.Tour
 
-class TourRepository(private val userDao: TourDao) {
+class TourRepository(private val tourDao: TourDao) {
 
-    val readAllData: LiveData<List<Tour>> = userDao.readAllData()
+    val readAllData: LiveData<List<Tour>> = tourDao.readAllData()
 
-    suspend fun addUser(tour: Tour) {
-        userDao.addTour(tour)
+    suspend fun addTour(tour: Tour) {
+        tourDao.addTour(tour)
     }
 
-    suspend fun updateUser(tour: Tour) {
-        userDao.updateTour(tour)
+    suspend fun updateTour(tour: Tour) {
+        tourDao.updateTour(tour)
     }
 
-    suspend fun deleteUser(tour: Tour) {
-        userDao.deleteTour(tour)
+    suspend fun deleteTour(tour: Tour) {
+        tourDao.deleteTour(tour)
     }
 
     suspend fun deleteAllTours() {
-        userDao.deleteAllTours()
+        tourDao.deleteAllTours()
     }
 
 }

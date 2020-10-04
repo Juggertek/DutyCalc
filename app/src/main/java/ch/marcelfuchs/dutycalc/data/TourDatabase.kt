@@ -12,7 +12,7 @@ import ch.marcelfuchs.dutycalc.model.Tour
 @TypeConverters(Converters::class)
 abstract class TourDatabase : RoomDatabase() {
 
-    abstract fun userDao(): TourDao
+    abstract fun tourDao(): TourDao
 
     companion object {
         @Volatile

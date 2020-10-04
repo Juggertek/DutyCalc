@@ -6,18 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.marcelfuchs.dutycalc.R
-import ch.marcelfuchs.dutycalc.databinding.ListFragmentBinding
+import ch.marcelfuchs.dutycalc.databinding.FragmentListBinding
 import ch.marcelfuchs.dutycalc.viewmodel.TourViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class ListFragment : Fragment() {
 
-    private lateinit var viewModel: TourViewModel
+    private lateinit var mTourViewModel: TourViewModel
 
-    private var mBinding: ListFragmentBinding? = null
+    private var mBinding: FragmentListBinding? = null
 
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = mBinding!!
@@ -33,13 +34,16 @@ class ListFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // DutyDayViewModel, muss hier instanziert werden, da für DataBinding benötigt.
-        viewModel = ViewModelProvider(this).get(TourViewModel::class.java)
+        // TourViewModel, muss hier instanziert werden, da für DataBinding benötigt.
+        mTourViewModel = ViewModelProvider(this).get(TourViewModel::class.java)
+        mTourViewModel.readAllData.observe(viewLifecycleOwner, Observer { tour ->
+            adapter.setData(tour)
+        })
 
         // DataBinding, muss hier instanziert werden, weil nur die onCreateView Funktion eine View? zurückgibt.
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding.viewModel = mTourViewModel
 
         return binding.root
     }
