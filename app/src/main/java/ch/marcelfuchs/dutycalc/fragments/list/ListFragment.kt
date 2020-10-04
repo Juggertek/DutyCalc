@@ -1,21 +1,21 @@
 package ch.marcelfuchs.dutycalc.fragments.list
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import ch.marcelfuchs.dutycalc.viewmodel.DutyDayViewModel
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.ListFragmentBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import ch.marcelfuchs.dutycalc.viewmodel.TourViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class ListFragment : Fragment() {
 
-    private lateinit var viewModel: DutyDayViewModel
+    private lateinit var viewModel: TourViewModel
 
     private var mBinding: ListFragmentBinding? = null
 
@@ -28,8 +28,13 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        // Recyclerview
+        val adapter = ListAdapter()
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         // DutyDayViewModel, muss hier instanziert werden, da für DataBinding benötigt.
-        viewModel = ViewModelProvider(this).get(DutyDayViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TourViewModel::class.java)
 
         // DataBinding, muss hier instanziert werden, weil nur die onCreateView Funktion eine View? zurückgibt.
         mBinding = DataBindingUtil.inflate(inflater, R.layout.list_fragment, container, false)
@@ -41,7 +46,7 @@ class ListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        
+
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()

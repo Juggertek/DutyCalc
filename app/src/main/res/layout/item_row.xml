@@ -5,264 +5,279 @@
     android:id="@+id/rowLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="24sp">
+    android:padding="8sp">
 
     <TextView
-        android:id="@+id/firstDayOfTour_tv"
-        android:layout_width="80dp"
+        android:id="@+id/day1_tv"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="@string/day_1"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="23.11.2020" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dayOfTourDividerText_tv"
-        android:layout_width="80dp"
+        android:id="@+id/day1DutyTime_tv"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:gravity="center"
-        android:text="@string/dayOfTourDividerText"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/lastDayOfTour_tv"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstDayOfTour_tv" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/day1_tv"
+        app:layout_constraintStart_toEndOf="@+id/day1_tv"
+        tools:text="34:25" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/day1DutyTime_tv"
+        app:layout_constraintStart_toEndOf="@+id/day1DutyTime_tv"
+        app:layout_constraintTop_toTopOf="@+id/day1DutyTime_tv" />
 
     <TextView
-        android:id="@+id/lastDayOfTour_tv"
-        android:layout_width="80dp"
+        android:id="@+id/day2_tv"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="@string/day_2"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/day1_tv"
+        app:layout_constraintTop_toBottomOf="@+id/day1_tv" />
+
+    <TextView
+        android:id="@+id/day2DutyTime_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:gravity="center"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="28.11.2020" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/day2_tv"
+        app:layout_constraintStart_toEndOf="@+id/day2_tv"
+        tools:text="34:25" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/CardView_1"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lastDayOfTour_tv"
-        app:layout_constraintStart_toEndOf="@+id/dayOfTourDividerText_tv"
-        app:layout_constraintTop_toTopOf="@+id/firstDayOfTour_tv">
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/day2DutyTime_tv"
+        app:layout_constraintStart_toEndOf="@+id/day2DutyTime_tv"
+        app:layout_constraintTop_toTopOf="@+id/day2DutyTime_tv" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/day3_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="@string/day_3"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/day1_tv"
+        app:layout_constraintTop_toBottomOf="@+id/day2_tv" />
 
-            <TextView
-                android:id="@+id/day1_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/day_1"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/day3DutyTime_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/day3_tv"
+        app:layout_constraintStart_toEndOf="@+id/day3_tv"
+        tools:text="14:25" />
 
-            <TextView
-                android:id="@+id/day1DutyTime_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="34:25" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/day3DutyTime_tv"
+        app:layout_constraintStart_toEndOf="@+id/day3DutyTime_tv"
+        app:layout_constraintTop_toTopOf="@+id/day3DutyTime_tv" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/CardView_2"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lastDayOfTour_tv"
-        app:layout_constraintStart_toEndOf="@+id/CardView_1"
-        app:layout_constraintTop_toTopOf="@+id/firstDayOfTour_tv">
+    <TextView
+        android:id="@+id/day4_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="@string/day_4"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/day1_tv"
+        app:layout_constraintTop_toBottomOf="@+id/day3_tv" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/day4DutyTime_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/day4_tv"
+        app:layout_constraintStart_toEndOf="@+id/day4_tv"
+        tools:text="34:25" />
 
-            <TextView
-                android:id="@+id/day2_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/day_2"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar
+        android:id="@+id/progressBar4"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/day4DutyTime_tv"
+        app:layout_constraintStart_toEndOf="@+id/day4DutyTime_tv"
+        app:layout_constraintTop_toTopOf="@+id/day4DutyTime_tv" />
 
-            <TextView
-                android:id="@+id/day2DutyTime_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="34:25" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/day5_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="@string/day_5"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/day1_tv"
+        app:layout_constraintTop_toBottomOf="@+id/day4_tv" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/CardView_3"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lastDayOfTour_tv"
-        app:layout_constraintStart_toEndOf="@+id/CardView_2"
-        app:layout_constraintTop_toTopOf="@+id/firstDayOfTour_tv">
+    <TextView
+        android:id="@+id/day5DutyTime_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/day5_tv"
+        app:layout_constraintStart_toEndOf="@+id/day5_tv"
+        tools:text="34:25" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <ProgressBar
+        android:id="@+id/progressBar5"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/day5DutyTime_tv"
+        app:layout_constraintStart_toEndOf="@+id/day5DutyTime_tv"
+        app:layout_constraintTop_toTopOf="@+id/day5DutyTime_tv" />
 
-            <TextView
-                android:id="@+id/day3_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/day_3"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/day6_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="@string/day_6"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/day1_tv"
+        app:layout_constraintTop_toBottomOf="@+id/day5_tv" />
 
-            <TextView
-                android:id="@+id/day3DutyTime_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="14:25" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/day6DutyTime_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/day6_tv"
+        app:layout_constraintStart_toEndOf="@+id/day6_tv"
+        tools:text="34:25" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/CardView_4"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lastDayOfTour_tv"
-        app:layout_constraintStart_toEndOf="@+id/CardView_3"
-        app:layout_constraintTop_toTopOf="@+id/firstDayOfTour_tv">
+    <ProgressBar
+        android:id="@+id/progressBar6"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/day6DutyTime_tv"
+        app:layout_constraintStart_toEndOf="@+id/day6DutyTime_tv"
+        app:layout_constraintTop_toTopOf="@+id/day6DutyTime_tv" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/day7_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:text="@string/day_7"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/day1_tv"
+        app:layout_constraintTop_toBottomOf="@+id/day6_tv" />
 
-            <TextView
-                android:id="@+id/day4_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/day_4"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/day7DutyTime_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/day7_tv"
+        app:layout_constraintStart_toEndOf="@+id/day7_tv"
+        tools:text="34:25" />
 
-            <TextView
-                android:id="@+id/day4DutyTime_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="34:25" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    <ProgressBar
+        android:id="@+id/progressBar7"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/day7DutyTime_tv"
+        app:layout_constraintStart_toEndOf="@+id/day7DutyTime_tv"
+        app:layout_constraintTop_toTopOf="@+id/day7DutyTime_tv" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/CardView_5"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lastDayOfTour_tv"
-        app:layout_constraintStart_toEndOf="@+id/CardView_4"
-        app:layout_constraintTop_toTopOf="@+id/firstDayOfTour_tv">
+    <TextView
+        android:id="@+id/total_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/total_tv"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/day1_tv"
+        app:layout_constraintTop_toBottomOf="@+id/day7_tv" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/totalHours_tv"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/total_tv"
+        app:layout_constraintStart_toEndOf="@+id/total_tv"
+        tools:text="34:25" />
 
-            <TextView
-                android:id="@+id/day5_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/day_5"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar
+        android:id="@+id/progressBar_total"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/totalHours_tv"
+        app:layout_constraintStart_toEndOf="@+id/totalHours_tv"
+        app:layout_constraintTop_toTopOf="@+id/totalHours_tv" />
 
-            <TextView
-                android:id="@+id/day5DutyTime_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="34:25" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/CardView_6"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/lastDayOfTour_tv"
-        app:layout_constraintStart_toEndOf="@+id/CardView_5"
-        app:layout_constraintTop_toTopOf="@+id/firstDayOfTour_tv">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/day6_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/day_6"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/day6DutyTime_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="34:25" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
