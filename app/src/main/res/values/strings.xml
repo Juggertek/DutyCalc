@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">DutyCalc</string>
     <string name="action_settings">Settings</string>
+
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="fragment_list_label">Tour list</string>
+    <string name="fragment_add_label">Add Dutyday</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!--    Strings for the fragment_list.xml:-->
     <string name="fab_content_description">Adds a new dutyday.</string>
     <string name="dayOfTourDividerText">until</string>
     <string name="day_1">Day 1</string>
@@ -19,6 +19,10 @@
     <string name="day_6">Day 6</string>
     <string name="day_7">Day 7</string>
     <string name="total_tv">Total:</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--    Strings for the fragment_add.xml:-->
+    <string name="cbHasStandby">STBY @RL</string>
+    <string name="hours_span_divider">until</string>
+    <string name="show_label">Show</string>
+    <string name="duty_closing_label">Duty closing</string>
 </resources>

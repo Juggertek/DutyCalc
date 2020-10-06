@@ -1,6 +1,8 @@
 package ch.marcelfuchs.dutycalc.converters
 
 import androidx.room.TypeConverter
+import ch.marcelfuchs.dutycalc.model.DutyDay
+import com.google.gson.Gson
 import java.sql.Date
 import java.sql.Time
 
@@ -24,4 +26,10 @@ class Converters {
     fun timeToLong(date: Time?): Long? {
         return date?.time
     }
+
+    @TypeConverter
+    fun dutyDayToString(dutyDay: DutyDay): String = Gson().toJson(dutyDay)
+
+    @TypeConverter
+    fun stringToDutyDay(string: String): DutyDay = Gson().fromJson(string, DutyDay::class.java)
 }

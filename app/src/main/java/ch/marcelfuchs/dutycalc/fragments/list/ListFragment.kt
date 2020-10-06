@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.FragmentListBinding
@@ -15,6 +15,8 @@ import ch.marcelfuchs.dutycalc.viewmodel.TourViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class ListFragment : Fragment() {
+
+    private lateinit var mAdapter: ListAdapter
 
     private lateinit var mTourViewModel: TourViewModel
 
@@ -29,15 +31,10 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Recyclerview
-        val adapter = ListAdapter()
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
         // TourViewModel, muss hier instanziert werden, da für DataBinding benötigt.
         mTourViewModel = ViewModelProvider(this).get(TourViewModel::class.java)
-        mTourViewModel.readAllData.observe(viewLifecycleOwner, Observer { tour ->
-            adapter.setData(tour)
+        mTourViewModel.readAllData.observe(viewLifecycleOwner, { tour ->
+            mAdapter.setData(tour)
         })
 
         // DataBinding, muss hier instanziert werden, weil nur die onCreateView Funktion eine View? zurückgibt.
@@ -45,15 +42,19 @@ class ListFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = mTourViewModel
 
+        // Recyclerview
+        mAdapter = ListAdapter()
+        binding.recyclerView.adapter = mAdapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        binding.fab.setOnClickListener {
+            findNavController().navigate(R.id.action_ListFragment_to_addFragment)
         }
     }
 

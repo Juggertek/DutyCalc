@@ -1,13 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <!-- Der nachfolgende Import wird für das Setzen der Visibility der TextViews benötigt -->
+        <import type="android.view.View" />
 
+        <variable
+            name="viewModel"
+            type="ch.marcelfuchs.dutycalc.viewmodel.TourViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tvTotalDuty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.add.AddFragment" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <CheckBox
+            android:id="@+id/cbHasStby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/cbHasStandby"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etStbyStart"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:autofillHints=""
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:importantForAutofill="no"
+            android:inputType="time"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:visibility="@{cbHasStby.checked?View.VISIBLE:View.GONE}"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/cbHasStby"
+            tools:text="04:00" />
+
+        <EditText
+            android:id="@+id/etStbyEnd"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:importantForAutofill="no"
+            android:inputType="time"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:visibility="@{cbHasStby.checked?View.VISIBLE:View.GONE}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/etStbyStart"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            tools:text="08:05" />
+
+        <TextView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hours_span_divider"
+            android:visibility="@{cbHasStby.checked?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/etStbyStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/etStbyStart" />
+
+        <TextView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hours_span_divider"
+            app:layout_constraintBottom_toBottomOf="@+id/etShow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/etShow" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/show_label"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/etShow"
+            app:layout_constraintEnd_toEndOf="@+id/etShow"
+            app:layout_constraintStart_toStartOf="@+id/etShow" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/duty_closing_label"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/etDutyClosing"
+            app:layout_constraintEnd_toEndOf="@+id/etDutyClosing"
+            app:layout_constraintStart_toStartOf="@+id/etDutyClosing" />
+
+        <EditText
+            android:id="@+id/etShow"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="time"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/etStbyStart"
+            tools:text="08:05" />
+
+        <EditText
+            android:id="@+id/etDutyClosing"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/edit_text_border"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:inputType="time"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/etShow"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            tools:text="19:45" />
+
+        <TextView
+            android:id="@+id/tvTotalDutyTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:text="55:35" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="128dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_horizontal"
+            android:text="Running 6 day total:"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
