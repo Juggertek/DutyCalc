@@ -9,11 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.FragmentAddBinding
-import ch.marcelfuchs.dutycalc.viewmodel.TourViewModel
+import ch.marcelfuchs.dutycalc.viewmodel.ViewModel
+import java.sql.Date
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddFragment : Fragment() {
 
-    private lateinit var mTourViewModel: TourViewModel
+    private lateinit var mViewModel: ViewModel
 
     private var mBinding: FragmentAddBinding? = null
 
@@ -26,14 +29,21 @@ class AddFragment : Fragment() {
     ): View? {
 
         // TourViewModel, muss hier instanziert werden, da für DataBinding benötigt.
-        mTourViewModel = ViewModelProvider(this).get(TourViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(ViewModel::class.java)
 
         // DataBinding, muss hier instanziert werden, weil nur die onCreateView Funktion eine View? zurückgibt.
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add, container, false)
         binding.lifecycleOwner = this
-        binding.viewModel = mTourViewModel
+        binding.viewModel = mViewModel
 
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        binding.btnDayDec.setOnClickListener { mViewModel.decreaseDay() }
+        binding.btnDayInc.setOnClickListener { mViewModel.increaseDay() }
     }
 
     //Fragments outlive their views. Make sure you clean up any references to the binding class instance in the fragment's onDestroyView() method.

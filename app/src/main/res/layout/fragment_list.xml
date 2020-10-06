@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ch.marcelfuchs.dutycalc.viewmodel.TourViewModel" />
+            type="ch.marcelfuchs.dutycalc.viewmodel.ViewModel" />
 
     </data>
 

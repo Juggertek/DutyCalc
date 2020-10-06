@@ -11,14 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.FragmentListBinding
-import ch.marcelfuchs.dutycalc.viewmodel.TourViewModel
-import com.google.android.material.snackbar.Snackbar
+import ch.marcelfuchs.dutycalc.viewmodel.ViewModel
 
 class ListFragment : Fragment() {
 
     private lateinit var mAdapter: ListAdapter
 
-    private lateinit var mTourViewModel: TourViewModel
+    private lateinit var mViewModel: ViewModel
 
     private var mBinding: FragmentListBinding? = null
 
@@ -32,15 +31,15 @@ class ListFragment : Fragment() {
     ): View? {
 
         // TourViewModel, muss hier instanziert werden, da für DataBinding benötigt.
-        mTourViewModel = ViewModelProvider(this).get(TourViewModel::class.java)
-        mTourViewModel.readAllData.observe(viewLifecycleOwner, { tour ->
+        mViewModel = ViewModelProvider(this).get(ViewModel::class.java)
+        mViewModel.readAllData.observe(viewLifecycleOwner, { tour ->
             mAdapter.setData(tour)
         })
 
         // DataBinding, muss hier instanziert werden, weil nur die onCreateView Funktion eine View? zurückgibt.
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
         binding.lifecycleOwner = this
-        binding.viewModel = mTourViewModel
+        binding.viewModel = mViewModel
 
         // Recyclerview
         mAdapter = ListAdapter()

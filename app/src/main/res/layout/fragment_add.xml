@@ -9,8 +9,9 @@
 
         <variable
             name="viewModel"
-            type="ch.marcelfuchs.dutycalc.viewmodel.TourViewModel" />
+            type="ch.marcelfuchs.dutycalc.viewmodel.ViewModel" />
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tvTotalDuty"
@@ -24,17 +25,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="@string/cbHasStandby"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
         <EditText
             android:id="@+id/etStbyStart"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:autofillHints=""
@@ -98,14 +99,14 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="24dp"
             android:gravity="center_horizontal"
             android:text="@string/show_label"
             android:textAlignment="center"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/etShow"
             app:layout_constraintEnd_toEndOf="@+id/etShow"
-            app:layout_constraintStart_toStartOf="@+id/etShow" />
+            app:layout_constraintStart_toStartOf="@+id/etShow"
+            app:layout_constraintTop_toBottomOf="@+id/etStbyStart" />
 
         <TextView
             android:id="@+id/textView2"
@@ -122,7 +123,7 @@
             android:id="@+id/etShow"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/edit_text_border"
@@ -132,7 +133,7 @@
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/etStbyStart"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:text="08:05" />
 
         <EditText
@@ -162,7 +163,6 @@
             android:textAlignment="center"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             tools:text="55:35" />
@@ -181,6 +181,40 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@{viewModel.newDutyDayDate.toString()}"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="28. Feb. 2012" />
+
+        <ImageButton
+            android:id="@+id/btnDayDec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+            app:layout_constraintEnd_toStartOf="@+id/tvDate"
+            app:layout_constraintTop_toTopOf="@+id/tvDate"
+            app:srcCompat="@drawable/ic_baseline_arrow_left_24" />
+
+        <ImageButton
+            android:id="@+id/btnDayInc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+            app:layout_constraintStart_toEndOf="@+id/tvDate"
+            app:layout_constraintTop_toTopOf="@+id/tvDate"
+            app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
