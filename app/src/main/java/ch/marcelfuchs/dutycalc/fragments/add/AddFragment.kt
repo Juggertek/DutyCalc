@@ -1,6 +1,7 @@
 package ch.marcelfuchs.dutycalc.fragments.add
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.FragmentAddBinding
+import ch.marcelfuchs.dutycalc.model.DutyDay
+import ch.marcelfuchs.dutycalc.model.Tour
 import ch.marcelfuchs.dutycalc.viewmodel.ViewModel
+import kotlinx.android.synthetic.main.fragment_add.*
 import java.sql.Date
-import java.text.SimpleDateFormat
-import java.util.*
+import java.sql.Time
 
 class AddFragment : Fragment() {
 
@@ -44,11 +47,55 @@ class AddFragment : Fragment() {
 
         binding.btnDayDec.setOnClickListener { mViewModel.decreaseDay() }
         binding.btnDayInc.setOnClickListener { mViewModel.increaseDay() }
+
+        binding.btnAddDutyDay.setOnClickListener { insertDataToDatabase() }
     }
 
     //Fragments outlive their views. Make sure you clean up any references to the binding class instance in the fragment's onDestroyView() method.
     override fun onDestroyView() {
         super.onDestroyView()
         mBinding = null
+    }
+
+    private fun insertDataToDatabase() {
+        val date = Date.valueOf(tvDate.text.toString())
+        val standByStart = Time.valueOf(etStbyStart.text.toString())
+        val standByEnd = Time.valueOf(etStbyStart.text.toString())
+        val show = Time.valueOf(etShow.text.toString())
+        val closingTime = Time.valueOf(etDutyClosing.text.toString())
+
+//        try {
+//            if (inputCheck(firstName, lastName, age, dob)) {
+//                // Create User Object
+        val dutyDay = DutyDay(
+            date,
+            standByStart,
+            standByEnd,
+            show,
+            closingTime
+        )
+
+        val tour= Tour(dutyDay)
+
+//                    firstName,
+//                    lastName,
+//                    age.toIntOrNull(),
+//                    if (dob.isEmpty()) null else Date.valueOf(dob)
+//                )
+        // Add Data to Database
+        mViewModel.addTour(tour)
+//                Toast.makeText(
+//                    requireContext(), "Successfully added!", Toast.LENGTH_LONG
+//                ).show()
+//                // Navigate Back
+//                findNavController().navigate(R.id.action_addFragment_to_listFragment)
+//            } else {
+//                Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_LONG)
+//                    .show()
+//            }
+//        } catch (e: IllegalArgumentException) {
+//            Toast.makeText(requireContext(), "Please use format: YYYY-MM-DD", Toast.LENGTH_LONG)
+//                .show()
+//        }
     }
 }

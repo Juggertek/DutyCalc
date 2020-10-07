@@ -8,11 +8,11 @@ import java.sql.Time
 data class Tour(
     @PrimaryKey
     val day1: DutyDay,
-    val day2: DutyDay,
-    val day3: DutyDay,
-    val day4: DutyDay,
-    val day5: DutyDay,
-    val day6: DutyDay,
-    val day7: DutyDay,
-    val totalHours: Time
+    val day2: DutyDay?=null,
+    val day3: DutyDay?=null,
+    val day4: DutyDay?=null,
+    val day5: DutyDay?=null,
+    val day6: DutyDay?=null,
+    val day7: DutyDay?=null,
+    val totalHours: Time?=null
 )

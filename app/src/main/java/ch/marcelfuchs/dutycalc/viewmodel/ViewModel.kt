@@ -11,8 +11,6 @@ import ch.marcelfuchs.dutycalc.repository.TourRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.sql.Date
-import java.text.SimpleDateFormat
-import java.util.*
 
 // Konstante zur Addition/Subtraktion eines Tages.
 private const val DAY_IN_MILLISECONDS: Long = 1000 * 60 * 60 * 24

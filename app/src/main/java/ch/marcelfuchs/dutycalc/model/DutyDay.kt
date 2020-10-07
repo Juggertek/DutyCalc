@@ -9,6 +9,8 @@ import java.sql.Time
 data class DutyDay(
     @PrimaryKey
     val date: Date,
+    val standByStart: Time?,
+    val standByEnd: Time?,
     val showTime: Time,
-    val  closingTime:Time
+    val closingTime: Time
 )

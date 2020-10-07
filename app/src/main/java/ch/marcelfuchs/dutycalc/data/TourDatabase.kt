@@ -27,7 +27,7 @@ abstract class TourDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     TourDatabase::class.java,
-                    "user_database"
+                    "tour_database"
                 ).build()
                 INSTANCE = instance
                 return instance
