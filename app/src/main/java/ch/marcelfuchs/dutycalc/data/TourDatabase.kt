@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import ch.marcelfuchs.dutycalc.converters.Converters
+import ch.marcelfuchs.dutycalc.converters.DataConverters
 import ch.marcelfuchs.dutycalc.model.Tour
 
 @Database(entities = [Tour::class], version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
+@TypeConverters(DataConverters::class)
 abstract class TourDatabase : RoomDatabase() {
 
     abstract fun tourDao(): TourDao

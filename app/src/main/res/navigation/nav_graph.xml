@@ -17,5 +17,12 @@
     <fragment
         android:id="@+id/addFragment"
         android:name="ch.marcelfuchs.dutycalc.fragments.add.AddFragment"
-        android:label="@string/fragment_add_label" />
+        android:label="@string/fragment_add_label"
+        tools:layout="@layout/fragment_add">
+        <action
+            android:id="@+id/action_addFragment_to_ListFragment"
+            app:destination="@id/ListFragment"
+            app:popUpTo="@id/ListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

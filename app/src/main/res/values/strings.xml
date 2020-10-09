@@ -25,4 +25,7 @@
     <string name="hours_span_divider">until</string>
     <string name="show_label">Show</string>
     <string name="duty_closing_label">Duty closing</string>
+    <string name="btnCancel">Cancel</string>
+    <string name="btnOk">OK</string>
+    <string name="hint_times_text">00:00</string>
 </resources>
