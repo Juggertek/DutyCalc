@@ -7,9 +7,6 @@
         <!-- Der nachfolgende Import wird für das Setzen der Visibility der TextViews benötigt -->
         <import type="android.view.View" />
 
-        <!--        Der nachfolgende Import wird für das Konvertieren von Time nach String benötigt -->
-        <import type="ch.marcelfuchs.dutycalc.converters.BindingConverter" />
-
         <variable
             name="viewModel"
             type="ch.marcelfuchs.dutycalc.viewmodel.ViewModel" />
@@ -47,7 +44,7 @@
             android:hint="@string/hint_times_text"
             android:importantForAutofill="no"
             android:inputType="time"
-            android:text="@={BindingConverter.timeToString(viewModel.stbyStart)}"
+            android:text="@{viewModel.stbyStart.toString().subSequence(0,5)}"
             android:textAlignment="center"
             android:textSize="24sp"
             android:visibility="@{cbHasStby.checked?View.VISIBLE:View.GONE}"
@@ -65,7 +62,7 @@
             android:hint="@string/hint_times_text"
             android:importantForAutofill="no"
             android:inputType="time"
-            android:text="@{viewModel.stbyEnd}"
+            android:text="@{viewModel.stbyEnd.toString().subSequence(0,5)}"
             android:textAlignment="center"
             android:textSize="24sp"
             android:visibility="@{cbHasStby.checked?View.VISIBLE:View.GONE}"
@@ -133,7 +130,7 @@
             android:gravity="center_horizontal"
             android:hint="@string/hint_times_text"
             android:inputType="time"
-            android:text="@{viewModel.show}"
+            android:text="@{viewModel.show.toString().subSequence(0,5)}"
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
@@ -149,7 +146,7 @@
             android:gravity="center_horizontal"
             android:hint="@string/hint_times_text"
             android:inputType="time"
-            android:text="@{viewModel.dutyClosing}"
+            android:text="@{viewModel.dutyClosing.toString().subSequence(0,5)}"
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/etShow"
@@ -160,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@{viewModel.newDutyDayDate}"
+            android:text="@{viewModel.newDutyDayDate.toString()}"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -189,23 +186,49 @@
             app:layout_constraintTop_toTopOf="@+id/tvDate"
             app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:gravity="center_horizontal"
+            android:text="@string/tv_dutytime_text"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/etShow"
+            app:layout_constraintStart_toStartOf="@+id/etShow"
+            app:layout_constraintTop_toBottomOf="@+id/etShow" />
+
+        <TextView
+            android:id="@+id/tvDutyTime"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_border"
+            android:gravity="center_horizontal"
+            android:text="@{viewModel.dutyTime.toString()}"
+            android:textSize="30sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="@+id/etDutyClosing"
+            app:layout_constraintStart_toStartOf="@+id/etDutyClosing"
+            tools:text="60:15" />
+
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="100dp"
             android:text="@string/btnCancel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etShow" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <Button
             android:id="@+id/btnOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginRight="48dp"
             android:text="@string/btnOk"
             app:layout_constraintBaseline_toBaselineOf="@+id/btnCancel"
             app:layout_constraintEnd_toEndOf="parent" />

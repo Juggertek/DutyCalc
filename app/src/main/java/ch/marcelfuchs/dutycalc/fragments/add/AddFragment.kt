@@ -10,8 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.FragmentAddBinding
-import ch.marcelfuchs.dutycalc.model.Tour
 import ch.marcelfuchs.dutycalc.viewmodel.ViewModel
+import java.sql.Date
+import java.sql.Time
 
 class AddFragment : Fragment() {
 
@@ -45,12 +46,30 @@ class AddFragment : Fragment() {
         binding.btnDayInc.setOnClickListener { mViewModel.increaseDay() }
 
         binding.btnCancel.setOnClickListener { findNavController().navigate(R.id.action_addFragment_to_ListFragment) }
-        binding.btnOk.setOnClickListener { mViewModel.insertDataToDatabase() }
+        binding.btnOk.setOnClickListener { convertVariables() }
     }
 
     //Fragments outlive their views. Make sure you clean up any references to the binding class instance in the fragment's onDestroyView() method.
     override fun onDestroyView() {
         super.onDestroyView()
         mBinding = null
+    }
+
+    /*
+    * Da das ViewModel keinen Bezug zur View haben darf, beziehe ich die Strings für die Variablen
+    * hier im Fragment aus den EditText Boxen, rechne diese in die entsprechenden Formate um
+    * (+":00" muss angehängt werden, da Time im Format "XX:XX:XX" sein muss)...
+    * */
+
+    fun convertVariables() {
+        val date = Date.valueOf(binding.tvDate.text.toString())
+        val hasStby = binding.cbHasStby.isChecked
+        val stbStart = Time.valueOf(binding.etStbyEnd.text.toString() + ":00")
+        val stbyEnd = Time.valueOf(binding.etStbyEnd.text.toString() + ":00")
+        val show = Time.valueOf(binding.etShow.text.toString() + ":00")
+        val dutyClosing = Time.valueOf(binding.etDutyClosing.text.toString() + ":00")
+
+        // ...und übergebe diese per Funktionsaufruf an das ViewModel.
+        mViewModel.insertDataToDatabase(date,hasStby,stbStart,stbyEnd, show, dutyClosing)
     }
 }

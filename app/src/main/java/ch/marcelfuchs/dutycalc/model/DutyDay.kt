@@ -8,7 +8,8 @@ import java.sql.Time
 @Entity(tableName = "dutyday_table")
 data class DutyDay(
     @PrimaryKey
-    val date: Date?,
+    val date: Date,
+    val hasStby:Boolean,
     val standByStart: Time?,
     val standByEnd: Time?,
     val showTime: Time,

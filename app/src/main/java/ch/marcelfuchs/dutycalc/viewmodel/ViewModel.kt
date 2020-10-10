@@ -12,16 +12,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.sql.Date
 import java.sql.Time
+import java.util.*
 
 // Konstante zur Addition/Subtraktion eines Tages.
 private const val DAY_IN_MILLISECONDS: Long = 1000 * 60 * 60 * 24
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
 
-    /* Erstellen der LiveData Bindungen zur View (fragment_add.xml) und initialisieren mit Grundwerten
-    wenn AddFragment aufgerufen und gezeichnet wird. Es wird nur mit Strings gearbeitet, die Konvertierung in
-    die entsprechenden Klassen (Date, Time) erfolgt erst bei Aufruf der entsprechenden Funktionen im Konstruktor.
-     */
+    //Erstellen der LiveData Bindungen zur View (fragment_add.xml) mit null:
 
     // Erzeugt aktuelles Datum
     private val _newDutyDayDate = MutableLiveData((Date(System.currentTimeMillis())))
@@ -30,17 +28,20 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     private val _hasStby = MutableLiveData(false)
     var hasStby: LiveData<Boolean> = _hasStby
 
-    private val _stbyStart=MutableLiveData(Time(5,0,0))
+    private val _stbyStart = MutableLiveData<Time>(null)
     var stbyStart: LiveData<Time> = _stbyStart
 
-    private val _stbyEnd = MutableLiveData("")
-    var stbyEnd: LiveData<String> = _stbyEnd
+    private val _stbyEnd = MutableLiveData<Time>(null)
+    var stbyEnd: LiveData<Time> = _stbyEnd
 
-    private val _show = MutableLiveData("")
-    var show: LiveData<String> = _show
+    private val _show = MutableLiveData<Time>(null)
+    var show: LiveData<Time> = _show
 
-    private val _dutyClosing = MutableLiveData("")
-    var dutyClosing: LiveData<String> = _dutyClosing
+    private val _dutyClosing = MutableLiveData<Time>(null)
+    var dutyClosing: LiveData<Time> = _dutyClosing
+
+    private val _dutyTime = MutableLiveData<Time>(null)
+    var dutyTime: LiveData<Time> = _dutyTime
 
     val readAllData: LiveData<List<Tour>>
     private val repository: TourRepository
@@ -78,37 +79,41 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun decreaseDay() {
-        val stringDate = newDutyDayDate.value
-        val date = Date.valueOf(stringDate)
-        val dateInMilliseconds = date.time
+        val dateInMilliseconds = newDutyDayDate.value!!.time
         // Einen Tag in Millisekunden subtrahieren:
         val newDateInMilliseconds = dateInMilliseconds.minus(DAY_IN_MILLISECONDS)
-        val newDate = Date(newDateInMilliseconds)
-        _newDutyDayDate.value = newDate.toString()
+        val newDate = newDateInMilliseconds.let { Date(it) }
+        _newDutyDayDate.value = newDate
     }
 
     fun increaseDay() {
-        val stringDate = newDutyDayDate.value
-        val date = Date.valueOf(stringDate)
-        val dateInMilliseconds = date.time
+        val dateInMilliseconds = newDutyDayDate.value!!.time
         // Einen Tag in Millisekunden addieren:
         val newDateInMilliseconds = dateInMilliseconds.plus(DAY_IN_MILLISECONDS)
         val newDate = Date(newDateInMilliseconds)
-        _newDutyDayDate.value = newDate.toString()
+        _newDutyDayDate.value = newDate
     }
 
-    fun insertDataToDatabase() {
+    fun insertDataToDatabase(
+        date: Date,
+        hasStby: Boolean,
+        stbyStart: Time,
+        stbyEnd: Time,
+        show: Time,
+        dutyClosing: Time
+    ) {
+        if (hasStby) {
+//            val stbyDuty = Time(stbyEnd.time - stbyStart.time)
+//            val duty = Time(dutyClosing.time - show.time)
+//            val totalDuty = stbyDuty.time + duty.time
+//            _dutyTime.value = Time(totalDuty)
+            val testTime=Time(26,0,0)
+            _dutyTime.value=testTime
 
-        // Nachfolgend werden die oben instanzierten Variablen in die entsprechenden Klassen umgewandelt:
 
-        val show = Time.valueOf(show.value)
-        val end = Time.valueOf(dutyClosing.value)
-        calculateDutyTime(show, end)
-//        val date = Date.valueOf(tvDate.text.toString())
-//        val standByStart = Time.valueOf(etStbyStart.text.toString())
-//        val standByEnd = Time.valueOf(etStbyStart.text.toString())
-//        val show = Time.valueOf(etShow.text.toString())
-//        val closingTime = Time.valueOf(etDutyClosing.text.toString())
+        }else{
+
+        }
 
 //        try {
 //            if (inputCheck(firstName, lastName, age, dob)) {
@@ -136,7 +141,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 //                    age.toIntOrNull(),
 //                    if (dob.isEmpty()) null else Date.valueOf(dob)
 //                )
-        // Add Data to Database
+            // Add Data to Database
 //        mViewModel.addTour(tour)
 //                Toast.makeText(
 //                    requireContext(), "Successfully added!", Toast.LENGTH_LONG
@@ -151,11 +156,5 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 //            Toast.makeText(requireContext(), "Please use format: YYYY-MM-DD", Toast.LENGTH_LONG)
 //                .show()
 //        }
+        }
     }
-
-    fun calculateDutyTime(show: Time, closing: Time): Time {
-        val difference = closing.time - show.time
-        _stbyStart.value = Time(difference).toString()
-        return Time(difference)
-    }
-}
