@@ -12,7 +12,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.sql.Date
 import java.sql.Time
-import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
+import kotlin.time.toDuration
 
 // Konstante zur Addition/Subtraktion eines Tages.
 private const val DAY_IN_MILLISECONDS: Long = 1000 * 60 * 60 * 24
@@ -40,8 +43,10 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     private val _dutyClosing = MutableLiveData<Time>(null)
     var dutyClosing: LiveData<Time> = _dutyClosing
 
-    private val _dutyTime = MutableLiveData<Time>(null)
-    var dutyTime: LiveData<Time> = _dutyTime
+    @ExperimentalTime
+    private val _dutyTime = MutableLiveData<Duration>(null)
+    @ExperimentalTime
+    var dutyTime: LiveData<Duration> = _dutyTime
 
     val readAllData: LiveData<List<Tour>>
     private val repository: TourRepository
@@ -94,6 +99,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         _newDutyDayDate.value = newDate
     }
 
+    @ExperimentalTime
     fun insertDataToDatabase(
         date: Date,
         hasStby: Boolean,
@@ -103,12 +109,10 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         dutyClosing: Time
     ) {
         if (hasStby) {
-//            val stbyDuty = Time(stbyEnd.time - stbyStart.time)
-//            val duty = Time(dutyClosing.time - show.time)
-//            val totalDuty = stbyDuty.time + duty.time
-//            _dutyTime.value = Time(totalDuty)
-            val testTime=Time(26,0,0)
-            _dutyTime.value=testTime
+            val stbyDuty = Time(stbyEnd.time - stbyStart.time)
+            val duty = Time(dutyClosing.time - show.time)
+            val totalDuty = stbyDuty.time + duty.time
+            _dutyTime.value =totalDuty.toDuration(TimeUnit.HOURS)
 
 
         }else{

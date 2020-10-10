@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.sql.Date
 import java.sql.Time
+import java.time.Duration
 
 @Entity(tableName = "dutyday_table")
 data class DutyDay(
@@ -14,5 +15,5 @@ data class DutyDay(
     val standByEnd: Time?,
     val showTime: Time,
     val closingTime: Time,
-    val dutyTime: Time
+    val dutyTime: Duration
 )

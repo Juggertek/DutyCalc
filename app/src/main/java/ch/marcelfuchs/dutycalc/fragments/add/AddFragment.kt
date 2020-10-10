@@ -13,6 +13,7 @@ import ch.marcelfuchs.dutycalc.databinding.FragmentAddBinding
 import ch.marcelfuchs.dutycalc.viewmodel.ViewModel
 import java.sql.Date
 import java.sql.Time
+import kotlin.time.ExperimentalTime
 
 class AddFragment : Fragment() {
 
@@ -39,6 +40,7 @@ class AddFragment : Fragment() {
         return binding.root
     }
 
+    @ExperimentalTime
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -61,6 +63,7 @@ class AddFragment : Fragment() {
     * (+":00" muss angehängt werden, da Time im Format "XX:XX:XX" sein muss)...
     * */
 
+    @ExperimentalTime
     fun convertVariables() {
         val date = Date.valueOf(binding.tvDate.text.toString())
         val hasStby = binding.cbHasStby.isChecked
