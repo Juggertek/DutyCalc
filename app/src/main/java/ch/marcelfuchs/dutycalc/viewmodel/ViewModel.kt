@@ -43,10 +43,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     private val _dutyClosing = MutableLiveData<Time>(null)
     var dutyClosing: LiveData<Time> = _dutyClosing
 
-    @ExperimentalTime
-    private val _dutyTime = MutableLiveData<Duration>(null)
-    @ExperimentalTime
-    var dutyTime: LiveData<Duration> = _dutyTime
+    private val _dutyTime = MutableLiveData<Float>(null)
+    var dutyTime: LiveData<Float> = _dutyTime
 
     val readAllData: LiveData<List<Tour>>
     private val repository: TourRepository
@@ -99,9 +97,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         _newDutyDayDate.value = newDate
     }
 
-    @ExperimentalTime
     fun insertDataToDatabase(
-        date: Date,
         hasStby: Boolean,
         stbyStart: Time,
         stbyEnd: Time,
@@ -112,7 +108,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
             val stbyDuty = Time(stbyEnd.time - stbyStart.time)
             val duty = Time(dutyClosing.time - show.time)
             val totalDuty = stbyDuty.time + duty.time
-            _dutyTime.value =totalDuty.toDuration(TimeUnit.HOURS)
+            _stbyStart.value =Time(totalDuty)
+            _dutyTime.value=61.75f
 
 
         }else{

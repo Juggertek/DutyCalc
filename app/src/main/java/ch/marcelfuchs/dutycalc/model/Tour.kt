@@ -14,5 +14,5 @@ data class Tour(
     val day5: DutyDay?=null,
     val day6: DutyDay?=null,
     val day7: DutyDay?=null,
-    val totalHours: Time?=null
+    val totalHours: Float
 )

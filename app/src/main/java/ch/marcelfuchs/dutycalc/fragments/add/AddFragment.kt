@@ -13,7 +13,6 @@ import ch.marcelfuchs.dutycalc.databinding.FragmentAddBinding
 import ch.marcelfuchs.dutycalc.viewmodel.ViewModel
 import java.sql.Date
 import java.sql.Time
-import kotlin.time.ExperimentalTime
 
 class AddFragment : Fragment() {
 
@@ -40,7 +39,6 @@ class AddFragment : Fragment() {
         return binding.root
     }
 
-    @ExperimentalTime
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -61,11 +59,11 @@ class AddFragment : Fragment() {
     * Da das ViewModel keinen Bezug zur View haben darf, beziehe ich die Strings für die Variablen
     * hier im Fragment aus den EditText Boxen, rechne diese in die entsprechenden Formate um
     * (+":00" muss angehängt werden, da Time im Format "XX:XX:XX" sein muss)...
+    * Das Datum muss übrigens nicht aus der TextView übernommen werden, dieses besteht ja bereits
+    * als newDutyDay Variable im ViewModel und kann später einfach von dort übernommen werden.
     * */
 
-    @ExperimentalTime
     fun convertVariables() {
-        val date = Date.valueOf(binding.tvDate.text.toString())
         val hasStby = binding.cbHasStby.isChecked
         val stbStart = Time.valueOf(binding.etStbyEnd.text.toString() + ":00")
         val stbyEnd = Time.valueOf(binding.etStbyEnd.text.toString() + ":00")
@@ -73,6 +71,6 @@ class AddFragment : Fragment() {
         val dutyClosing = Time.valueOf(binding.etDutyClosing.text.toString() + ":00")
 
         // ...und übergebe diese per Funktionsaufruf an das ViewModel.
-        mViewModel.insertDataToDatabase(date,hasStby,stbStart,stbyEnd, show, dutyClosing)
+        mViewModel.insertDataToDatabase(hasStby, stbStart, stbyEnd, show, dutyClosing)
     }
 }

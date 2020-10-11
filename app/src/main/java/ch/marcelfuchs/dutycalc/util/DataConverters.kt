@@ -1,4 +1,4 @@
-package ch.marcelfuchs.dutycalc.converters
+package ch.marcelfuchs.dutycalc.util
 
 import androidx.room.TypeConverter
 import ch.marcelfuchs.dutycalc.model.DutyDay

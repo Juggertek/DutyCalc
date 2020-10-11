@@ -7,6 +7,9 @@
         <!-- Der nachfolgende Import wird für das Setzen der Visibility der TextViews benötigt -->
         <import type="android.view.View" />
 
+        <!-- Der folgende Import wird für das >Konvertieren von Time nach String im Format "XX:XX" benutzt:-->
+<import type="ch.marcelfuchs.dutycalc.util.Converter"/>
+
         <variable
             name="viewModel"
             type="ch.marcelfuchs.dutycalc.viewmodel.ViewModel" />
@@ -18,6 +21,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ImageButton
+            android:id="@+id/btnDayDec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+            app:layout_constraintEnd_toStartOf="@+id/tvDate"
+            app:layout_constraintTop_toTopOf="@+id/tvDate"
+            app:srcCompat="@drawable/ic_baseline_arrow_left_24" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@{Converter.dateFormat(viewModel.newDutyDayDate)}"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="28. Feb. 2012" />
+
+        <ImageButton
+            android:id="@+id/btnDayInc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDate"
+            app:layout_constraintStart_toEndOf="@+id/tvDate"
+            app:layout_constraintTop_toTopOf="@+id/tvDate"
+            app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
 
         <CheckBox
             android:id="@+id/cbHasStby"
@@ -44,30 +81,12 @@
             android:hint="@string/hint_times_text"
             android:importantForAutofill="no"
             android:inputType="time"
-            android:text="@{viewModel.stbyStart.toString().subSequence(0,5)}"
+            android:text="@{Converter.dateToString(viewModel.stbyStart)}"
             android:textAlignment="center"
             android:textSize="24sp"
             android:visibility="@{cbHasStby.checked?View.VISIBLE:View.GONE}"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/cbHasStby" />
-
-        <EditText
-            android:id="@+id/etStbyEnd"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:background="@drawable/edit_text_border"
-            android:gravity="center_horizontal"
-            android:hint="@string/hint_times_text"
-            android:importantForAutofill="no"
-            android:inputType="time"
-            android:text="@{viewModel.stbyEnd.toString().subSequence(0,5)}"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:visibility="@{cbHasStby.checked?View.VISIBLE:View.GONE}"
-            app:layout_constraintBaseline_toBaselineOf="@+id/etStbyStart"
-            app:layout_constraintStart_toEndOf="@+id/imageView" />
 
         <TextView
             android:id="@+id/imageView"
@@ -82,18 +101,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/etStbyStart" />
 
-        <TextView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/etStbyEnd"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/hours_span_divider"
-            app:layout_constraintBottom_toBottomOf="@+id/etShow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/etShow" />
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/edit_text_border"
+            android:gravity="center_horizontal"
+            android:hint="@string/hint_times_text"
+            android:importantForAutofill="no"
+            android:inputType="time"
+            android:text="@{Converter.dateToString(viewModel.stbyEnd)}"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:visibility="@{cbHasStby.checked?View.VISIBLE:View.GONE}"
+            app:layout_constraintBaseline_toBaselineOf="@+id/etStbyStart"
+            app:layout_constraintStart_toEndOf="@+id/imageView" />
 
         <TextView
             android:id="@+id/textView"
@@ -130,11 +154,24 @@
             android:gravity="center_horizontal"
             android:hint="@string/hint_times_text"
             android:inputType="time"
-            android:text="@{viewModel.show.toString().subSequence(0,5)}"
+            android:text="@{Converter.dateToString(viewModel.show)}"
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/hours_span_divider"
+            app:layout_constraintBottom_toBottomOf="@+id/etShow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/etShow" />
 
         <EditText
             android:id="@+id/etDutyClosing"
@@ -146,45 +183,11 @@
             android:gravity="center_horizontal"
             android:hint="@string/hint_times_text"
             android:inputType="time"
-            android:text="@{viewModel.dutyClosing.toString().subSequence(0,5)}"
+            android:text="@{Converter.dateToString(viewModel.dutyClosing)}"
             android:textAlignment="center"
             android:textSize="24sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/etShow"
             app:layout_constraintStart_toEndOf="@+id/imageView2" />
-
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@{viewModel.newDutyDayDate.toString()}"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="28. Feb. 2012" />
-
-        <ImageButton
-            android:id="@+id/btnDayDec"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvDate"
-            app:layout_constraintEnd_toStartOf="@+id/tvDate"
-            app:layout_constraintTop_toTopOf="@+id/tvDate"
-            app:srcCompat="@drawable/ic_baseline_arrow_left_24" />
-
-        <ImageButton
-            android:id="@+id/btnDayInc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvDate"
-            app:layout_constraintStart_toEndOf="@+id/tvDate"
-            app:layout_constraintTop_toTopOf="@+id/tvDate"
-            app:srcCompat="@drawable/ic_baseline_arrow_right_24" />
 
         <TextView
             android:id="@+id/textView3"
@@ -205,7 +208,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_border"
             android:gravity="center_horizontal"
-            android:text="@{viewModel.dutyTime.toString()}"
+            android:text="@{Converter.floatToString(viewModel.dutyTime)}"
             android:textSize="30sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
             app:layout_constraintEnd_toEndOf="@+id/etDutyClosing"

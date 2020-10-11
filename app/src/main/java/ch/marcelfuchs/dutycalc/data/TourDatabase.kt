@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import ch.marcelfuchs.dutycalc.converters.DataConverters
+import ch.marcelfuchs.dutycalc.util.DataConverters
 import ch.marcelfuchs.dutycalc.model.Tour
 
 @Database(entities = [Tour::class], version = 1, exportSchema = false)
