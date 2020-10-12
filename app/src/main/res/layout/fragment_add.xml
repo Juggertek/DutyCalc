@@ -7,8 +7,8 @@
         <!-- Der nachfolgende Import wird für das Setzen der Visibility der TextViews benötigt -->
         <import type="android.view.View" />
 
-        <!-- Der folgende Import wird für das >Konvertieren von Time nach String im Format "XX:XX" benutzt:-->
-<import type="ch.marcelfuchs.dutycalc.util.Converter"/>
+        <!-- Der folgende Import wird für das Konvertieren von Time nach String im Format "XX:XX" benutzt:-->
+        <import type="ch.marcelfuchs.dutycalc.util.Converter" />
 
         <variable
             name="viewModel"

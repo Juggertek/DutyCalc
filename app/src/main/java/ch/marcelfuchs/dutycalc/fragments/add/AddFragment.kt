@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.FragmentAddBinding
 import ch.marcelfuchs.dutycalc.viewmodel.ViewModel
-import java.sql.Date
 import java.sql.Time
 
 class AddFragment : Fragment() {
@@ -65,12 +64,14 @@ class AddFragment : Fragment() {
 
     fun convertVariables() {
         val hasStby = binding.cbHasStby.isChecked
-        val stbStart = Time.valueOf(binding.etStbyEnd.text.toString() + ":00")
+        val stbyStart = Time.valueOf(binding.etStbyEnd.text.toString() + ":00")
         val stbyEnd = Time.valueOf(binding.etStbyEnd.text.toString() + ":00")
         val show = Time.valueOf(binding.etShow.text.toString() + ":00")
         val dutyClosing = Time.valueOf(binding.etDutyClosing.text.toString() + ":00")
+        // ...und übergebe diese per Funktionsaufruf an das ViewModel.
+
 
         // ...und übergebe diese per Funktionsaufruf an das ViewModel.
-        mViewModel.insertDataToDatabase(hasStby, stbStart, stbyEnd, show, dutyClosing)
+        mViewModel.insertDataToDatabase(hasStby, stbyStart, stbyEnd, show, dutyClosing)
     }
 }

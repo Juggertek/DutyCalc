@@ -12,10 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.sql.Date
 import java.sql.Time
-import java.util.concurrent.TimeUnit
-import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
-import kotlin.time.toDuration
 
 // Konstante zur Addition/Subtraktion eines Tages.
 private const val DAY_IN_MILLISECONDS: Long = 1000 * 60 * 60 * 24
@@ -108,11 +104,11 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
             val stbyDuty = Time(stbyEnd.time - stbyStart.time)
             val duty = Time(dutyClosing.time - show.time)
             val totalDuty = stbyDuty.time + duty.time
-            _stbyStart.value =Time(totalDuty)
-            _dutyTime.value=61.75f
+            _stbyStart.value = Time(totalDuty)
+            _dutyTime.value = 61.75f
 
 
-        }else{
+        } else {
 
         }
 
@@ -142,7 +138,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 //                    age.toIntOrNull(),
 //                    if (dob.isEmpty()) null else Date.valueOf(dob)
 //                )
-            // Add Data to Database
+        // Add Data to Database
 //        mViewModel.addTour(tour)
 //                Toast.makeText(
 //                    requireContext(), "Successfully added!", Toast.LENGTH_LONG
@@ -157,5 +153,5 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 //            Toast.makeText(requireContext(), "Please use format: YYYY-MM-DD", Toast.LENGTH_LONG)
 //                .show()
 //        }
-        }
     }
+}

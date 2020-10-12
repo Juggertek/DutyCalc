@@ -1,13 +1,20 @@
 package ch.marcelfuchs.dutycalc.util
 
+import androidx.databinding.InverseMethod
 import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Converter {
+    @InverseMethod("stringToDate")
     @JvmStatic
     fun dateToString(value: Time?): String? {
         return value?.toString()?.substring(0, 5)
+    }
+
+    @JvmStatic
+    fun stringToDate(value: String?): Time? {
+        return Time.valueOf(value)
     }
 
     @JvmStatic
