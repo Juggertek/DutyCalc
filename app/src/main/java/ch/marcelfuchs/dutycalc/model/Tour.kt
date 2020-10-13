@@ -2,7 +2,6 @@ package ch.marcelfuchs.dutycalc.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.sql.Time
 
 @Entity(tableName = "tour_table")
 data class Tour(
