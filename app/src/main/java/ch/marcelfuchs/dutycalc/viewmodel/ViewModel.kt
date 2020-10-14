@@ -11,7 +11,7 @@ import ch.marcelfuchs.dutycalc.repository.TourRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.sql.Date
-import java.sql.Time
+import kotlin.math.roundToInt
 
 // Konstante zur Addition/Subtraktion eines Tages.
 private const val DAY_IN_MILLISECONDS: Long = 1000 * 60 * 60 * 24
@@ -27,17 +27,17 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     private val _hasStby = MutableLiveData(false)
     var hasStby: LiveData<Boolean> = _hasStby
 
-    private val _stbyStart = MutableLiveData<Time>(null)
-    var stbyStart: LiveData<Time> = _stbyStart
+    private val _stbyStart = MutableLiveData<String>(null)
+    var stbyStart: LiveData<String> = _stbyStart
 
-    private val _stbyEnd = MutableLiveData<Time>(null)
-    var stbyEnd: LiveData<Time> = _stbyEnd
+    private val _stbyEnd = MutableLiveData<String>(null)
+    var stbyEnd: LiveData<String> = _stbyEnd
 
-    private val _show = MutableLiveData<Time>(null)
-    var show: LiveData<Time> = _show
+    private val _show = MutableLiveData<String>(null)
+    var show: LiveData<String> = _show
 
-    private val _dutyClosing = MutableLiveData<Time>(null)
-    var dutyClosing: LiveData<Time> = _dutyClosing
+    private val _dutyClosing = MutableLiveData<String>(null)
+    var dutyClosing: LiveData<String> = _dutyClosing
 
     private val _dutyTime = MutableLiveData<Float>(null)
     var dutyTime: LiveData<Float> = _dutyTime
@@ -95,21 +95,29 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insertDataToDatabase(
         hasStby: Boolean,
-        stbyStart: Time,
-        stbyEnd: Time,
-        show: Time,
-        dutyClosing: Time
+        stbyStart: String,
+        stbyEnd: String,
+        show: String,
+        dutyClosing: String
     ) {
         if (hasStby) {
-            val stbyDuty = Time(stbyEnd.time - stbyStart.time)
-            val duty = Time(dutyClosing.time - show.time)
-            val totalDuty = stbyDuty.time + duty.time
-            _stbyStart.value = Time(totalDuty)
-            _dutyTime.value = 61.75f
+            val stbyStartFloat = stringToFloat(stbyStart)
+            val stbyEndFloat = stringToFloat(stbyEnd)
+            val stbyDutyFloat = stbyEndFloat - stbyStartFloat
 
+            val showFloat = stringToFloat(show)
+            val dutyClosingFloat = stringToFloat(dutyClosing)
+            val dutyFloat = dutyClosingFloat - showFloat
 
+            val totaldutyFloat = stbyDutyFloat + dutyFloat
+            _dutyTime.value = totaldutyFloat
         } else {
+            val showFloat = stringToFloat(show)
+            val dutyClosingFloat = stringToFloat(dutyClosing)
+            val dutyFloat = dutyClosingFloat - showFloat
 
+            val totaldutyFloat = dutyFloat
+            _dutyTime.value = totaldutyFloat
         }
 
 //        try {
@@ -153,5 +161,19 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 //            Toast.makeText(requireContext(), "Please use format: YYYY-MM-DD", Toast.LENGTH_LONG)
 //                .show()
 //        }
+    }
+
+    fun stringToFloat(string: String): Float {
+        val hours = string.substringBefore(':').toFloat()
+        val minutes = string.substringAfter(':').toFloat()
+        return hours + minutes / 60
+    }
+
+    fun floatToString(float: Float): String {
+        val hours = float.toInt()
+        val hoursString = hours.toString().padStart(2, '0')
+        val minutes = ((float - hours) * 60).roundToInt()
+        val minutesString = minutes.toString().padStart(2, '0')
+        return hoursString + ":" + minutesString
     }
 }

@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.FragmentAddBinding
 import ch.marcelfuchs.dutycalc.viewmodel.ViewModel
-import java.sql.Time
 
 class AddFragment : Fragment() {
 
@@ -45,7 +44,7 @@ class AddFragment : Fragment() {
         binding.btnDayInc.setOnClickListener { mViewModel.increaseDay() }
 
         binding.btnCancel.setOnClickListener { findNavController().navigate(R.id.action_addFragment_to_ListFragment) }
-        binding.btnOk.setOnClickListener { convertVariables() }
+        binding.btnOk.setOnClickListener { sendVariables() }
     }
 
     //Fragments outlive their views. Make sure you clean up any references to the binding class instance in the fragment's onDestroyView() method.
@@ -56,20 +55,17 @@ class AddFragment : Fragment() {
 
     /*
     * Da das ViewModel keinen Bezug zur View haben darf, beziehe ich die Strings für die Variablen
-    * hier im Fragment aus den EditText Boxen, rechne diese in die entsprechenden Formate um
-    * (+":00" muss angehängt werden, da Time im Format "XX:XX:XX" sein muss)...
+    * hier im Fragment aus den EditText Boxen.
     * Das Datum muss übrigens nicht aus der TextView übernommen werden, dieses besteht ja bereits
     * als newDutyDay Variable im ViewModel und kann später einfach von dort übernommen werden.
     * */
 
-    fun convertVariables() {
+    fun sendVariables() {
         val hasStby = binding.cbHasStby.isChecked
-        val stbyStart = Time.valueOf(binding.etStbyEnd.text.toString() + ":00")
-        val stbyEnd = Time.valueOf(binding.etStbyEnd.text.toString() + ":00")
-        val show = Time.valueOf(binding.etShow.text.toString() + ":00")
-        val dutyClosing = Time.valueOf(binding.etDutyClosing.text.toString() + ":00")
-        // ...und übergebe diese per Funktionsaufruf an das ViewModel.
-
+        val stbyStart = binding.etStbyStart.text.toString()
+        val stbyEnd = binding.etStbyEnd.text.toString()
+        val show = binding.etShow.text.toString()
+        val dutyClosing = binding.etDutyClosing.text.toString()
 
         // ...und übergebe diese per Funktionsaufruf an das ViewModel.
         mViewModel.insertDataToDatabase(hasStby, stbyStart, stbyEnd, show, dutyClosing)
