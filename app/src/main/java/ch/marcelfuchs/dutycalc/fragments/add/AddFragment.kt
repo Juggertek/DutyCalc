@@ -10,11 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.FragmentAddBinding
-import ch.marcelfuchs.dutycalc.viewmodel.ViewModel
+import ch.marcelfuchs.dutycalc.viewmodel.AddViewModel
 
 class AddFragment : Fragment() {
 
-    private lateinit var mViewModel: ViewModel
+    private lateinit var mViewModel: AddViewModel
 
     private var mBinding: FragmentAddBinding? = null
 
@@ -27,7 +27,7 @@ class AddFragment : Fragment() {
     ): View? {
 
         // TourViewModel, muss hier instanziert werden, da für DataBinding benötigt.
-        mViewModel = ViewModelProvider(this).get(ViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(AddViewModel::class.java)
 
         // DataBinding, muss hier instanziert werden, weil nur die onCreateView Funktion eine View? zurückgibt.
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_add, container, false)

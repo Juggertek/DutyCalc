@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import ch.marcelfuchs.dutycalc.data.TourDatabase
+import ch.marcelfuchs.dutycalc.model.DutyDay
 import ch.marcelfuchs.dutycalc.model.Tour
 import ch.marcelfuchs.dutycalc.repository.TourRepository
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ import kotlin.math.roundToInt
 // Konstante zur Addition/Subtraktion eines Tages.
 private const val DAY_IN_MILLISECONDS: Long = 1000 * 60 * 60 * 24
 
-class ViewModel(application: Application) : AndroidViewModel(application) {
+class AddViewModel(application: Application) : AndroidViewModel(application) {
 
     //Erstellen der LiveData Bindungen zur View (fragment_add.xml) mit null:
 
@@ -120,16 +121,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
             _dutyTime.value = totaldutyFloat
         }
 
-//        try {
-//            if (inputCheck(firstName, lastName, age, dob)) {
-//                // Create User Object
-//        val dutyDay = DutyDay(
-//            date,
-//            standByStart,
-//            standByEnd,
-//            show,
-//            closingTime
-//        )
+
+        val activeDutyDay = DutyDay(newDutyDayDate.value,)
 
 //        val dutyDay2 = dutyDay1.copy()
 //        val dutyDay3 = dutyDay1.copy()
