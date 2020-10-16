@@ -6,7 +6,7 @@ import ch.marcelfuchs.dutycalc.model.Tour
 
 class TourRepository(private val tourDao: TourDao) {
 
-    val readAllData: LiveData<List<Tour>> = tourDao.readAllData()
+    val tourList: LiveData<List<Tour>> = tourDao.readAllData()
 
     suspend fun addTour(tour: Tour) {
         tourDao.addTour(tour)

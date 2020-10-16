@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import ch.marcelfuchs.dutycalc.data.TourDatabase
-import ch.marcelfuchs.dutycalc.model.DutyDay
 import ch.marcelfuchs.dutycalc.model.Tour
 import ch.marcelfuchs.dutycalc.repository.TourRepository
 import kotlinx.coroutines.Dispatchers
@@ -25,25 +24,25 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
     private val _newDutyDayDate = MutableLiveData((Date(System.currentTimeMillis())))
     var newDutyDayDate: LiveData<Date> = _newDutyDayDate
 
-    private val _hasStby = MutableLiveData(false)
-    var hasStby: LiveData<Boolean> = _hasStby
+//    private val _hasStby = MutableLiveData(false)
+//    var hasStby: LiveData<Boolean> = _hasStby
+//
+//    private val _stbyStart = MutableLiveData<String>(null)
+//    var stbyStart: LiveData<String> = _stbyStart
+//
+//    private val _stbyEnd = MutableLiveData<String>(null)
+//    var stbyEnd: LiveData<String> = _stbyEnd
+//
+//    private val _show = MutableLiveData<String>(null)
+//    var show: LiveData<String> = _show
+//
+//    private val _dutyClosing = MutableLiveData<String>(null)
+//    var dutyClosing: LiveData<String> = _dutyClosing
+//
+//    private val _dutyTime = MutableLiveData<Float>(null)
+//    var dutyTime: LiveData<Float> = _dutyTime
 
-    private val _stbyStart = MutableLiveData<String>(null)
-    var stbyStart: LiveData<String> = _stbyStart
-
-    private val _stbyEnd = MutableLiveData<String>(null)
-    var stbyEnd: LiveData<String> = _stbyEnd
-
-    private val _show = MutableLiveData<String>(null)
-    var show: LiveData<String> = _show
-
-    private val _dutyClosing = MutableLiveData<String>(null)
-    var dutyClosing: LiveData<String> = _dutyClosing
-
-    private val _dutyTime = MutableLiveData<Float>(null)
-    var dutyTime: LiveData<Float> = _dutyTime
-
-    val readAllData: LiveData<List<Tour>>
+    val tourList: LiveData<List<Tour>>
     private val repository: TourRepository
 
     init {
@@ -51,7 +50,7 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
             application
         ).tourDao()
         repository = TourRepository(tourDao)
-        readAllData = repository.readAllData
+        tourList = repository.tourList
     }
 
     fun addTour(tour: Tour) {

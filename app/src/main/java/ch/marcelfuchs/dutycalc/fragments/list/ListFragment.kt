@@ -32,7 +32,7 @@ class ListFragment : Fragment() {
 
         // TourViewModel, muss hier instanziert werden, da für DataBinding benötigt.
         mAddViewModel = ViewModelProvider(this).get(AddViewModel::class.java)
-        mAddViewModel.readAllData.observe(viewLifecycleOwner, { tour ->
+        mAddViewModel.tourList.observe(viewLifecycleOwner, { tour ->
             mAdapter.setData(tour)
         })
 

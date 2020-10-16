@@ -6,12 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "tour_table")
 data class Tour(
     @PrimaryKey
-    val day1: DutyDay,
-    val day2: DutyDay?=null,
-    val day3: DutyDay?=null,
-    val day4: DutyDay?=null,
-    val day5: DutyDay?=null,
-    val day6: DutyDay?=null,
-    val day7: DutyDay?=null,
+    val dutyDayList: List<DutyDay>,
     val totalHours: Float
 )
