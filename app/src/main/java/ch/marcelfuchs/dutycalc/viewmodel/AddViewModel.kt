@@ -104,7 +104,8 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
         if (hasStby) {
             val stbyStartFloat = stringToFloat(stbyStart)
             val stbyEndFloat = stringToFloat(stbyEnd)
-            val stbyDutyFloat = stbyEndFloat - stbyStartFloat
+            // STBY@RL zählt nur zu 25%:
+            val stbyDutyFloat = (stbyEndFloat - stbyStartFloat)/4
 
             val showFloat = stringToFloat(show)
             val dutyClosingFloat = stringToFloat(dutyClosing)
@@ -122,7 +123,7 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
         }
 
 
-        val activeDutyDay = DutyDay(newDutyDayDate.value,)
+//        val activeDutyDay = DutyDay(newDutyDayDate.value,)
 
 //        val dutyDay2 = dutyDay1.copy()
 //        val dutyDay3 = dutyDay1.copy()

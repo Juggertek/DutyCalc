@@ -43,8 +43,7 @@ class AddFragment : Fragment() {
         binding.btnDayDec.setOnClickListener { mViewModel.decreaseDay() }
         binding.btnDayInc.setOnClickListener { mViewModel.increaseDay() }
 
-        binding.btnCancel.setOnClickListener { findNavController().navigate(R.id.action_addFragment_to_ListFragment) }
-        binding.btnOk.setOnClickListener { sendVariables() }
+        binding.floatingActionButton.setOnClickListener { sendVariables() }
     }
 
     //Fragments outlive their views. Make sure you clean up any references to the binding class instance in the fragment's onDestroyView() method.
