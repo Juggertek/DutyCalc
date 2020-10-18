@@ -6,19 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import ch.marcelfuchs.dutycalc.util.DataConverters
-import ch.marcelfuchs.dutycalc.model.Tour
 
 @Database(entities = [Tour::class], version = 1, exportSchema = false)
 @TypeConverters(DataConverters::class)
-abstract class TourDatabase : RoomDatabase() {
+abstract class DutyDayDatabase : RoomDatabase() {
 
-    abstract fun tourDao(): TourDao
+    abstract fun tourDao(): DutyDayDao
 
     companion object {
         @Volatile
-        private var INSTANCE: TourDatabase? = null
+        private var INSTANCE: DutyDayDatabase? = null
 
-        fun getDatabase(context: Context): TourDatabase {
+        fun getDatabase(context: Context): DutyDayDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -26,7 +25,7 @@ abstract class TourDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    TourDatabase::class.java,
+                    DutyDayDatabase::class.java,
                     "tour_database"
                 ).build()
                 INSTANCE = instance

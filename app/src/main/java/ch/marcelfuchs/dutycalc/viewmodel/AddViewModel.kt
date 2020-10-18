@@ -5,9 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import ch.marcelfuchs.dutycalc.data.TourDatabase
-import ch.marcelfuchs.dutycalc.model.Tour
-import ch.marcelfuchs.dutycalc.repository.TourRepository
+import ch.marcelfuchs.dutycalc.data.DutyDayDatabase
+import ch.marcelfuchs.dutycalc.repository.DutyDayRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.sql.Date
@@ -43,13 +42,13 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
 //    var dutyTime: LiveData<Float> = _dutyTime
 
     val tourList: LiveData<List<Tour>>
-    private val repository: TourRepository
+    private val repository: DutyDayRepository
 
     init {
-        val tourDao = TourDatabase.getDatabase(
+        val tourDao = DutyDayDatabase.getDatabase(
             application
         ).tourDao()
-        repository = TourRepository(tourDao)
+        repository = DutyDayRepository(tourDao)
         tourList = repository.tourList
     }
 

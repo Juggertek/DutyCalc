@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.FragmentAddBinding
 import ch.marcelfuchs.dutycalc.viewmodel.AddViewModel

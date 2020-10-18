@@ -53,7 +53,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/day1_tv"
+                android:id="@+id/tv_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/day1DutyTime_tv"
+                android:id="@+id/tv_dutyTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

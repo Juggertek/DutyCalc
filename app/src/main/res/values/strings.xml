@@ -11,13 +11,6 @@
     <!--    Strings for the fragment_list.xml:-->
     <string name="fab_content_description">Adds a new dutyday.</string>
     <string name="dayOfTourDividerText">until</string>
-    <string name="day_1">Day 1</string>
-    <string name="day_2">Day 2</string>
-    <string name="day_3">Day 3</string>
-    <string name="day_4">Day 4</string>
-    <string name="day_5">Day 5</string>
-    <string name="day_6">Day 6</string>
-    <string name="day_7">Day 7</string>
     <string name="total_tv">Total:</string>
 
     <!--    Strings for the fragment_add.xml:-->

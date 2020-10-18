@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ch.marcelfuchs.dutycalc.R
-import ch.marcelfuchs.dutycalc.model.Tour
 import kotlinx.android.synthetic.main.item_row.view.*
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
@@ -27,13 +26,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = tourList[position]
 
-        holder.itemView.day1DutyTime_tv.text= currentItem.dutyDayList[0].dutyTime.toString()
-        holder.itemView.day2DutyTime_tv.text= currentItem.dutyDayList[1].dutyTime.toString()
-        holder.itemView.day3DutyTime_tv.text= currentItem.dutyDayList[2].dutyTime.toString()
-        holder.itemView.day4DutyTime_tv.text= currentItem.dutyDayList[3].dutyTime.toString()
-        holder.itemView.day5DutyTime_tv.text= currentItem.dutyDayList[4].dutyTime.toString()
-        holder.itemView.day6DutyTime_tv.text= currentItem.dutyDayList[5].dutyTime.toString()
-        holder.itemView.day7DutyTime_tv.text= currentItem.dutyDayList[6].dutyTime.toString()
+        holder.itemView.tv_date.text= currentItem.dutyDayList[0].dutyTime.toString()
         holder.itemView.totalHours_tv.text= currentItem.totalHours.toString()
 
 //        holder.itemView.rowLayout.setOnClickListener {
