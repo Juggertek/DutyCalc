@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.marcelfuchs.dutycalc.R
 import ch.marcelfuchs.dutycalc.databinding.FragmentListBinding
+import ch.marcelfuchs.dutycalc.model.DutyDay
 import ch.marcelfuchs.dutycalc.viewmodel.AddViewModel
 
 class ListFragment : Fragment() {
@@ -21,6 +23,8 @@ class ListFragment : Fragment() {
 
     private var mBinding: FragmentListBinding? = null
 
+    private var mDutyDayList: List<DutyDay>? = null
+
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = mBinding!!
 
@@ -30,9 +34,9 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // TourViewModel, muss hier instanziert werden, da für DataBinding benötigt.
+        // ViewModel, muss hier instanziert werden, da für DataBinding benötigt.
         mAddViewModel = ViewModelProvider(this).get(AddViewModel::class.java)
-        mAddViewModel.tourList.observe(viewLifecycleOwner, { tour ->
+        mAddViewModel.dutyDayList.observe(viewLifecycleOwner, { tour ->
             mAdapter.setData(tour)
         })
 
@@ -51,6 +55,16 @@ class ListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        mAddViewModel.dutyDayList.observe(this, Observer { toyEntries ->
+            if (toyEntries.isNullOrEmpty()) {
+                mAddViewModel.uiState.set(UIState.EMPTY)
+            } else {
+                mAddViewModel.uiState.set(UIState.HAS_DATA)
+                mAdapter.dutyDayList = toyEntries
+                mDutyDayList = toyEntries
+            }
+        })
 
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_ListFragment_to_addFragment)

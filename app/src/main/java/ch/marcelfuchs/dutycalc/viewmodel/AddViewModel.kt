@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import ch.marcelfuchs.dutycalc.data.DutyDayDatabase
+import ch.marcelfuchs.dutycalc.model.DutyDay
 import ch.marcelfuchs.dutycalc.repository.DutyDayRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,62 +18,46 @@ private const val DAY_IN_MILLISECONDS: Long = 1000 * 60 * 60 * 24
 
 class AddViewModel(application: Application) : AndroidViewModel(application) {
 
-    //Erstellen der LiveData Bindungen zur View (fragment_add.xml) mit null:
+    val dutyDayBeingModified: DutyDay
+
+    private val mIsEdit = false
 
     // Erzeugt aktuelles Datum
     private val _newDutyDayDate = MutableLiveData((Date(System.currentTimeMillis())))
     var newDutyDayDate: LiveData<Date> = _newDutyDayDate
 
-//    private val _hasStby = MutableLiveData(false)
-//    var hasStby: LiveData<Boolean> = _hasStby
-//
-//    private val _stbyStart = MutableLiveData<String>(null)
-//    var stbyStart: LiveData<String> = _stbyStart
-//
-//    private val _stbyEnd = MutableLiveData<String>(null)
-//    var stbyEnd: LiveData<String> = _stbyEnd
-//
-//    private val _show = MutableLiveData<String>(null)
-//    var show: LiveData<String> = _show
-//
-//    private val _dutyClosing = MutableLiveData<String>(null)
-//    var dutyClosing: LiveData<String> = _dutyClosing
-//
-//    private val _dutyTime = MutableLiveData<Float>(null)
-//    var dutyTime: LiveData<Float> = _dutyTime
-
-    val tourList: LiveData<List<Tour>>
+    val dutyDayList: LiveData<List<DutyDay>>
     private val repository: DutyDayRepository
 
     init {
-        val tourDao = DutyDayDatabase.getDatabase(
+        val dutyDayDao = DutyDayDatabase.getDatabase(
             application
-        ).tourDao()
-        repository = DutyDayRepository(tourDao)
-        tourList = repository.tourList
+        ).dutyDayDao()
+        repository = DutyDayRepository(dutyDayDao)
+        dutyDayList = repository.tourList
     }
 
-    fun addTour(tour: Tour) {
+    fun addDutyDay(dutyDay: DutyDay) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addTour(tour)
+            repository.addDutyDay(dutyDay)
         }
     }
 
-    fun updateTour(tour: Tour) {
+    fun updateDutyDay(dutyDay: DutyDay) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.updateTour(tour)
+            repository.updateDutyDay(dutyDay)
         }
     }
 
-    fun deleteTour(tour: Tour) {
+    fun deleteDutyDay(dutyDay: DutyDay) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteTour(tour)
+            repository.deleteDutyDay(dutyDay)
         }
     }
 
-    fun deleteAllTours() {
+    fun deleteAllDutyDays() {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllTours()
+            repository.deleteAllDutyDays()
         }
     }
 
@@ -103,21 +88,19 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
             val stbyStartFloat = stringToFloat(stbyStart)
             val stbyEndFloat = stringToFloat(stbyEnd)
             // STBY@RL zählt nur zu 25%:
-            val stbyDutyFloat = (stbyEndFloat - stbyStartFloat)/4
+            val stbyDutyFloat = (stbyEndFloat - stbyStartFloat) / 4
 
             val showFloat = stringToFloat(show)
             val dutyClosingFloat = stringToFloat(dutyClosing)
             val dutyFloat = dutyClosingFloat - showFloat
 
             val totaldutyFloat = stbyDutyFloat + dutyFloat
-            _dutyTime.value = totaldutyFloat
         } else {
             val showFloat = stringToFloat(show)
             val dutyClosingFloat = stringToFloat(dutyClosing)
             val dutyFloat = dutyClosingFloat - showFloat
 
             val totaldutyFloat = dutyFloat
-            _dutyTime.value = totaldutyFloat
         }
 
 
@@ -152,6 +135,7 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
 //        } catch (e: IllegalArgumentException) {
 //            Toast.makeText(requireContext(), "Please use format: YYYY-MM-DD", Toast.LENGTH_LONG)
 //                .show()
+
 //        }
     }
 

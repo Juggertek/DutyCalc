@@ -8,19 +8,19 @@ class DutyDayRepository(private val dutyDayDao: DutyDayDao) {
 
     val tourList: LiveData<List<DutyDay>> = dutyDayDao.readAllData()
 
-    suspend fun addTour(dutyDay: DutyDay) {
+    suspend fun addDutyDay(dutyDay: DutyDay) {
         dutyDayDao.addDutyDay(dutyDay)
     }
 
-    suspend fun updateTour(dutyDay: DutyDay) {
+    suspend fun updateDutyDay(dutyDay: DutyDay) {
         dutyDayDao.updateDutyDay(dutyDay)
     }
 
-    suspend fun deleteTour(dutyDay: DutyDay) {
+    suspend fun deleteDutyDay(dutyDay: DutyDay) {
         dutyDayDao.deleteDutyDay(dutyDay)
     }
 
-    suspend fun deleteAllTours() {
+    suspend fun deleteAllDutyDays() {
         dutyDayDao.deleteAllDutyDays()
     }
 

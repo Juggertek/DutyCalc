@@ -5,11 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ch.marcelfuchs.dutycalc.R
+import ch.marcelfuchs.dutycalc.model.DutyDay
 import kotlinx.android.synthetic.main.item_row.view.*
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-    private var tourList = emptyList<Tour>()
+    var dutyDayList = emptyList<DutyDay>()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -20,14 +21,14 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return tourList.size
+        return dutyDayList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = tourList[position]
+        val currentItem = dutyDayList[position]
 
-        holder.itemView.tv_date.text= currentItem.dutyDayList[0].dutyTime.toString()
-        holder.itemView.totalHours_tv.text= currentItem.totalHours.toString()
+        holder.itemView.tv_date.text= currentItem.date.toString()
+        holder.itemView.tv_dutyTime.text= currentItem.dutyTime.toString()
 
 //        holder.itemView.rowLayout.setOnClickListener {
 //            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
@@ -35,8 +36,8 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 //        }
     }
 
-    fun setData(tour: List<Tour>) {
-        this.tourList = tour
+    fun setData(dutyDay: List<DutyDay>) {
+        this.dutyDayList = dutyDay
         notifyDataSetChanged()
     }
 }

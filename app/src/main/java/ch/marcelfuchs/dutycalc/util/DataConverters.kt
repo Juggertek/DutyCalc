@@ -26,18 +26,4 @@ class DataConverters {
     fun timeToLong(date: Time?): Long? {
         return date?.time
     }
-
-    @TypeConverter
-    fun dutyDayToString(dutyDay: DutyDay?): String = Gson().toJson(dutyDay)
-
-    @TypeConverter
-    fun stringToDutyDay(string: String?): DutyDay? {
-        val dutyDay: DutyDay?
-        if (string != null) {
-            dutyDay = Gson().fromJson(string, DutyDay::class.java)
-        } else {
-            dutyDay = null
-        }
-        return dutyDay
-    }
 }

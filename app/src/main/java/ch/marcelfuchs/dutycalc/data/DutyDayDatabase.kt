@@ -11,7 +11,7 @@ import ch.marcelfuchs.dutycalc.util.DataConverters
 @TypeConverters(DataConverters::class)
 abstract class DutyDayDatabase : RoomDatabase() {
 
-    abstract fun tourDao(): DutyDayDao
+    abstract fun dutyDayDao(): DutyDayDao
 
     companion object {
         @Volatile
